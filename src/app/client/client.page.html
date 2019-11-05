@@ -1,0 +1,107 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons>
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>client</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-progress-bar
+  *ngIf="loading"
+  type="indeterminate">
+</ion-progress-bar>
+
+<ion-content
+  *ngIf="!loading && client">
+
+  <ion-row>
+    <ion-col margin size="12">
+      <ion-label>
+        <h1>{{client.name}}</h1>
+      </ion-label>
+    </ion-col>
+  </ion-row>
+
+  <form 
+    class="client-form"
+    [formGroup]="form">
+
+    <ion-row
+      class="client-form-item">
+      <ion-col 
+        class="client-form-item"
+        size="12">
+        <ion-item class="input-item client-form-item" lines="none">
+          <ion-label mode="ios" position="stacked">Nome</ion-label>
+          <ion-input 
+            [(ngModel)]="client.name"
+            [disabled]="saving"
+            mode="ios"
+            class="page-input"
+            formControlName="name"></ion-input>
+        </ion-item>
+  
+        <ion-item class="input-item client-form-item" lines="none">
+          <ion-label mode="ios" position="stacked">Email</ion-label>
+          <ion-input
+            [(ngModel)]="client.email"
+            [disabled]="saving"
+            mode="ios"
+            type="email"
+            class="page-input"
+            formControlName="email"></ion-input>
+        </ion-item>
+  
+        <ion-item class="input-item client-form-item" lines="none">
+          <ion-label mode="ios" position="stacked">Telefone</ion-label>
+          <ion-input 
+            [(ngModel)]="client.phone"
+            [disabled]="saving"
+            mode="ios"
+            placeholder="000-000-0000"
+            class="page-input"
+            formControlName="phone"></ion-input>
+        </ion-item>
+  
+        <ion-item class="input-item client-form-item" lines="none">
+          <ion-label mode="ios" position="stacked">Telefone Celular</ion-label>
+            <ion-input
+              [(ngModel)]="client.cell_phone"
+              [disabled]="saving"
+              mode="ios"
+              class="page-input"
+              placeholder="+000 (000) 000-0000"
+              formControlName="cell_phone"></ion-input>
+        </ion-item>
+  
+        <ion-item class="input-item client-form-item" lines="none">
+          <ion-label mode="ios" position="stacked">Data de Nascimento</ion-label>
+          <ion-datetime
+              display-format="DD/MM/YYYY"
+              [disabled]="saving"
+              placeholder="Selecione a Data"
+              (ionChange)="onChange($event)"
+              formControlName="birthday"></ion-datetime>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row 
+      justify-content-center
+      align-items-center>
+      <ion-col size="12">
+        <ion-button 
+        [disabled]="form.invalid || saving"
+        class="agora-btn"
+        expand="block"
+        mode="ios"
+        (click)="submit()">
+          Salvar
+        </ion-button>
+      </ion-col>
+    </ion-row>
+
+  </form>
+
+</ion-content>

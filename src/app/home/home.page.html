@@ -1,14 +1,64 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
+    <ion-searchbar
+      mode="md"></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+
+  <ion-fab 
+    horizontal="end"
+    vertical="bottom"
+    slot="fixed">
+
+    <ion-fab-button
+      color="success"
+      mode="md"
+      [routerLink]="['/register']">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+
+  </ion-fab>
+  
   <div class="ion-padding">
-    The world is your oyster.
-    <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs/">docs</a> will be your guide.</p>
+
+    <ion-row class="greetings-row">
+      <ion-col size="12">
+        <h1>
+          Meus Clientes
+        </h1>
+      </ion-col>
+    </ion-row>
+
+    <ion-row 
+      justify-content-center 
+      align-items-center
+      *ngIf="loading">
+      <ion-col size="12">
+        Processando...
+      </ion-col>
+    </ion-row>
+
+    <ion-list
+      *ngIf="!loading && clientList.length > 0">
+      <ion-item
+        *ngFor="let client of clientList"
+        (click)="selectClient(client.id)">
+        <ion-label>
+          <h2>{{client.name}}</h2>
+          <p>Tell : {{client.cell_phone}}</p>
+        </ion-label>
+        <ion-button
+          color="danger" 
+          (click)="deleteClient(client.id)">
+          <ion-icon slot="icon-only" name="close"></ion-icon>
+        </ion-button>
+      </ion-item>
+    </ion-list>
+
+    
+
+
   </div>
 </ion-content>
